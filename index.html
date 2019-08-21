@@ -1,0 +1,79 @@
+<!doctype html>
+<html lang="en" style="height: 100%; width: 100%; overflow-y: hidden; overflow-x: hidden;">
+
+<head>
+  <meta charset="UTF-8">
+  <title>OTab</title>
+  <base href="/">
+  <link rel="shortcut icon" type="image/x-icon" href="assets/img/favicon.ico" />
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link href="./assets/css/bootstrap-light.min.css" rel="stylesheet">
+  <link href="./assets/css/bootstrap-dark.min.css" rel="stylesheet">
+  <link href="./assets/css/custom.css" rel="stylesheet">
+  <link href="./assets/css/material-icons.css" rel="stylesheet">
+</head>
+<body style="height: 100%; width: 100%;">
+  <nav class="navbar navbar-expand navbar-light bg-light justify-content-between" style="
+  padding-bottom: 0px;
+  padding-top: 0px;">
+    <a class="navbar-brand" href="#"><img src="./assets/img/icon96.png" alt='Icon OTab'></a>
+    <span class="navbar-text">
+        One tab to find and rule all newtab
+      </span>
+    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+    <div>
+      <button type="button" class="btn btn-light" name="toggleDark" id='btn-light'>Light</button>
+      <button type="button" class="btn btn-dark" name="toggleDark" id='btn-dark'>Dark</button>
+    </div>
+  </nav>
+  <div style="height: 100%; width: 100%; overflow-y: hidden; overflow-x: hidden;">
+    <div class="container-fluid top-buffer">
+        <div id='test'></div>
+        <div class="row" id='grid-logo-extension'>
+            
+        </div>
+    </div>
+  </div>
+  <div class="modal fade" id="modalSetting" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h4 class="modal-title" id="settingsTitle">Settings</h4>
+          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+          </button>
+        </div>
+        <div class="modal-body">
+          <div id='localStorageFileName' class="alert alert-info collapse"></div>
+          <h6>If you get an error when you try to launch the extension :</h6>
+          <ul>
+            <li>Open the manifest.json file</li>
+            <li>Click on the link below and look </li>
+            <li id='pathManifest'></li>
+            <li>Then add it in the input below the name of the file next to "newtab" for example you could find this : "chrome_url_overrides": { "newtab": "newtab.html" }</li>
+          </ul>
+          <form class="needs-validation" novalidate>
+            <div class="form-group">
+              <label for="fileNameExtension">File name :</label>
+              <input type="text" class="form-control" id="fileNameExtension" pattern="^\/[\w,\s-/]+\.html$" aria-describedby="fileNameHelp" placeholder="Enter file name" required>
+              <small id="fileNameHelp" class="form-text text-muted">The file name must be like that /filename.html and you can add like this : /directory/filename.html if it's in a specific directory</small>
+              <div class="invalid-feedback">
+                Please enter a valid fileName.
+              </div>
+            </div>
+            <div class="modal-footer">
+              <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+              <button type="submit" class="btn btn-primary" id='submitModal'>Save changes</button>
+            </div>
+          </form>
+        </div>
+      </div>
+    </div>
+  </div>
+</body>
+<script src="./assets/js/jquery-3.3.1.min.js"></script>
+<script src="./assets/js/bootstrap.min.js"></script>
+<script src="./assets/js/script.js"></script>
+</html>
