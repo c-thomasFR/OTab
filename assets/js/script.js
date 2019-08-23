@@ -102,6 +102,15 @@ function checkCssLoadedDark()
 
 document.addEventListener('DOMContentLoaded', function() 
 {
+    for(var i=1;i<30;i++)
+    {
+        $('#backgroundPicker').append('<div class="col-lg-2 col-md-6">'+
+        '<span class="d-block mb-4 h-100">'+
+            '<div data-src="./assets/img/background/'+i+'.png" class="background-img" style="background: url(\'./assets/img/background/'+i+'.png\');'+
+            'background-repeat: repeat;background-size: auto;"></div>'+
+        '</span>'+
+    '</div>');
+    }
     const pickr = new Pickr({
 
         // Selector or element which will be replaced with the actual color-picker.
@@ -226,6 +235,13 @@ document.addEventListener('DOMContentLoaded', function()
         document.querySelector('#header-nav').setAttribute('style', 
         'background-color:'+localStorage['header-color']+' !important');
     }
+    if (localStorage.getItem('backgroundImg') !== null) 
+    {
+        $('body').css('background-image', 'url('+localStorage['backgroundImg']+')');
+        $('body').css('background-repeat', 'repeat');
+        $('body').css('background-size', 'auto');
+    }
+
     var buttonsToggleDark = document.getElementsByName('toggleDark');
     if(localStorage["darkMode"] === undefined)
     {
@@ -363,9 +379,14 @@ document.addEventListener('DOMContentLoaded', function()
                 chrome.tabs.create({url:  $(this).attr('href')});
             });
         });
-        $('#modalSetting').on('show.bs.modal', function (event) 
+        $( ".background-img" ).bind( "click", function(e) 
         {
-            
-        })
+                //chrome.tabs.create({url:  $(this).attr('href')});background-repeat: repeat;background-size
+                console.log($(this).attr('data-src'));
+                $('body').css('background-image', 'url('+$(this).attr('data-src')+')');
+                $('body').css('background-repeat', 'repeat');
+                $('body').css('background-size', 'auto');
+                localStorage['backgroundImg'] = $(this).attr('data-src');
+        });
     });
 });

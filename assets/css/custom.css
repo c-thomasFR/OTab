@@ -1,9 +1,11 @@
-body {
+body 
+{
     font-family: "Segoe UI", "Lucida Grande", Tahoma, sans-serif;
     font-size: 100%;
 }
 
-.main {
+.main 
+{
     overflow: hidden;
     width: 400px;
     max-height: 600px;
@@ -12,14 +14,24 @@ body {
     padding: 0px;
 }
 
-#no-padding{
+#no-padding
+{
     padding: 0px;
     margin: 0px;
 }
 
-#links{
+#links
+{
     overflow:auto;
     padding: 0px;
 }
 
-.top-buffer { margin-top:20px; }
+.top-buffer 
+{
+    margin-top:20px; 
+}
+.background-img {
+    width: 100px; /* You can set the dimensions to whatever you want */
+    height:100px;
+    object-fit: cover;
+}
