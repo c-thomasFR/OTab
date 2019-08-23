@@ -11,11 +11,14 @@
   <link href="./assets/css/bootstrap-dark.min.css" rel="stylesheet">
   <link href="./assets/css/custom.css" rel="stylesheet">
   <link href="./assets/css/material-icons.css" rel="stylesheet">
+  <link href="./assets/css/classic.min.css" rel="stylesheet"/>
+  <link href="./assets/css/monolith.min.css" rel="stylesheet"/>
+  <link href="./assets/css/nano.min.css" rel="stylesheet"/>
 </head>
 <body style="height: 100%; width: 100%;">
-  <nav class="navbar navbar-expand navbar-light bg-light justify-content-between" style="
+  <nav id='header-nav' class="navbar navbar-expand navbar-light bg-light justify-content-between" style="
   padding-bottom: 0px;
-  padding-top: 0px;">
+  pading-top: 0px;">
     <a class="navbar-brand" href="#"><img src="./assets/img/icon96.png" alt='Icon OTab'></a>
     <span class="navbar-text">
         One tab to find and rule all newtab
@@ -41,7 +44,7 @@
     </div>
     -->
     <div>
-        <button type="button" class="btn btn-primary" name="build">
+        <button type="button" class="btn btn-primary" name="build" data-toggle="modal" data-target="#modalTheme">
           <i class="material-icons align-middle" style="padding-right:10px" aria-hidden="true">build</i>
           <span class="align-middle">Theme settings</span>
         </button>
@@ -55,7 +58,41 @@
         </div>
     </div>
   </div>
-  <div class="modal fade" id="modalSetting" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal fade" id="modalTheme" tabindex="-1" role="dialog" aria-labelledby="themeTitle" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h4 class="modal-title" id="themeTitle">Theme settings</h4>
+          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+          </button>
+        </div>
+        <div class="modal-body">
+          <div class="form-group row">
+            <label for="message-text" class="col-sm-5 col-form-label">Mode:</label>
+            <div class="col-sm-7">
+              <button type="button" class="btn btn-light" name="toggleDark" id='btn-light'>
+                  <i class="material-icons align-middle" style="padding-right:10px" aria-hidden="true">compare</i>
+                  <span class="align-middle">Light</span>
+                </button>
+                <button type="button" class="btn btn-dark" name="toggleDark" id='btn-dark'>
+                  <i class="material-icons align-middle" style="padding-right:10px" aria-hidden="true">compare</i>
+                  <span class="align-middle">Dark</span>
+                </button>
+            </div>
+          </div>
+          <div class="form-group row">
+              <label for="message-text" class="col-sm-5 col-form-label">Color for the header:</label>
+              <div class="col-sm-7">
+                  <button type="button" class="btn btn-primary" id='btn-color-picker'>
+                  </button>
+              </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="modal fade" id="modalSetting" tabindex="-1" role="dialog" aria-labelledby="settingsTitle" aria-hidden="true">
     <div class="modal-dialog" role="document">
       <div class="modal-content">
         <div class="modal-header">
@@ -97,4 +134,5 @@
 <script src="./assets/js/jquery-3.3.1.min.js"></script>
 <script src="./assets/js/bootstrap.min.js"></script>
 <script src="./assets/js/script.js"></script>
+<script src="./assets/js/pickr.min.js"></script>
 </html>
