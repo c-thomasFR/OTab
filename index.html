@@ -19,13 +19,32 @@
     <a class="navbar-brand" href="#"><img src="./assets/img/icon96.png" alt='Icon OTab'></a>
     <span class="navbar-text">
         One tab to find and rule all newtab
-      </span>
-    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
-      <span class="navbar-toggler-icon"></span>
-    </button>
+    </span>
+    <!--
     <div>
-      <button type="button" class="btn btn-light" name="toggleDark" id='btn-light'>Light</button>
-      <button type="button" class="btn btn-dark" name="toggleDark" id='btn-dark'>Dark</button>
+      <button type="button" class="btn btn-light" name="toggleDark" id='btn-light'>
+        <i class="material-icons align-middle" style="padding-right:10px" aria-hidden="true">compare</i>
+        <span class="align-middle">Light</span>
+      </button>
+      <button type="button" class="btn btn-dark" name="toggleDark" id='btn-dark'>
+        <i class="material-icons align-middle" style="padding-right:10px" aria-hidden="true">compare</i>
+        <span class="align-middle">Dark</span>
+      </button>
+      <button type="button" class="btn btn-secondary text-center" name="palette" id="palette">
+          <i class="material-icons align-middle" style="padding-right:10px" aria-hidden="true">palette</i>
+          <span class="align-middle">Palette</span>
+      </button>
+      <button type="button" class="btn btn-secondary text-center" name="wallpaper">
+          <i class="material-icons align-middle" style="padding-right:10px" aria-hidden="true">wallpaper</i>
+          <span class="align-middle">Wallpaper</span>
+      </button>
+    </div>
+    -->
+    <div>
+        <button type="button" class="btn btn-primary" name="build">
+          <i class="material-icons align-middle" style="padding-right:10px" aria-hidden="true">build</i>
+          <span class="align-middle">Theme settings</span>
+        </button>
     </div>
   </nav>
   <div style="height: 100%; width: 100%; overflow-y: hidden; overflow-x: hidden;">
@@ -51,7 +70,9 @@
           <ul>
             <li>Open the manifest.json file</li>
             <li>Click on the link below and look </li>
-            <li id='pathManifest'></li>
+            <li id='pathManifest'>
+              <a href="#" target="_blank" id='aLinkExtension'>Link of manifest.json of the extension</a>
+            </li>
             <li>Then add it in the input below the name of the file next to "newtab" for example you could find this : "chrome_url_overrides": { "newtab": "newtab.html" }</li>
           </ul>
           <form class="needs-validation" novalidate>

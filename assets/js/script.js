@@ -118,7 +118,7 @@ document.addEventListener('DOMContentLoaded', function()
             $('link[href="./assets/css/bootstrap-dark.min.css"]').prop('disabled', true);
         }
     }
-    checkCssLoadedDark();
+    /*checkCssLoadedDark();
     buttonsToggleDark[0].onclick = function()
     {
         toggleDarkLight();
@@ -126,7 +126,7 @@ document.addEventListener('DOMContentLoaded', function()
     buttonsToggleDark[1].onclick = function()
     {
         toggleDarkLight();
-    };
+    };*/
     var index = 0;
     var array=[];
     var options = document.getElementById('list_extensions');
@@ -156,7 +156,7 @@ document.addEventListener('DOMContentLoaded', function()
                 {
                     if(a.enabled==true && chrome.runtime.id!==a.id)
                     {
-                        var cardLogo = '<div class="col-lg-4 col-md-3 col-sm2" style="margin-bottom:10px;">'+
+                        var cardLogo = '<div class="col-lg-4 col-md-6 col-sm6" style="margin-bottom:10px;">'+
                             '<div class="card" style="width:100%;">'+
                                 '<div class="card-body">'+
                                     '<div class="row">'+
@@ -175,7 +175,7 @@ document.addEventListener('DOMContentLoaded', function()
                                         '</div>'+
                                         '<div class="col text-right" style="margin-top:15px;">'+
                                             '<button name="btn-choose-extension" data-id="'+a.id+'" class="btn btn-primary text-center">'+
-                                                '<i class="material-icons align-middle" style="padding-right:10px">launch</i>'+
+                                                '<i class="material-icons align-middle" style="padding-right:10px" aria-hidden="true">launch</i>'+
                                                 '<span class="align-middle">Start</span>'+
                                             '</button>'+
                                         '</div>'+
@@ -214,25 +214,24 @@ document.addEventListener('DOMContentLoaded', function()
             // Update the modal's content. We'll use jQuery here, but you could use a data binding library or other methods instead.
             if (localStorage.getItem(idExtension) !== null) 
             {
-                if ( $('#localStorageFileName').children().length === 0 ) 
-                {
-                    var h6FileName = document.createElement("h6");
-                    h6FileName.textContent = "The current filename stored is : "+localStorage[idExtension];
-                    $('#localStorageFileName').append(h6FileName);
-                    $('#localStorageFileName').show();
-                }
+                $('#localStorageFileName').empty();
+                var h6FileName = document.createElement("h6");
+                h6FileName.textContent = "The current filename stored is : "+localStorage[idExtension];
+                $('#localStorageFileName').append(h6FileName);
+                $('#localStorageFileName').show();
             }
-            var a = document.createElement("a");
-            a.setAttribute('id', "aLinkExtension");
-            a.textContent = "Link of manifest.json of the extension";
-            a.setAttribute('href', "chrome-extension://"+idExtension+"/manifest.json");
-            document.querySelector("#submitModal").setAttribute('data-id', idExtension);
-            var modal = $(this);
-            $('#pathManifest').append(a);
-            $('body').on('click','#aLinkExtension', function()
+            else
             {
+                $('#localStorageFileName').empty();
+                $('#localStorageFileName').hide();
+            }
+            document.querySelector("#aLinkExtension").setAttribute('href', "chrome-extension://"+idExtension+"/manifest.json");
+            document.querySelector("#submitModal").setAttribute('data-id', idExtension);
+            $( "#aLinkExtension").unbind( "click" );
+            $( "#aLinkExtension" ).bind( "click", function(e) 
+            {
+                e.preventDefault();
                 chrome.tabs.create({url:  $(this).attr('href')});
-                return false;
             });
         })
     });
