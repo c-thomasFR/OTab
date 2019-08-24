@@ -103,12 +103,24 @@ document.addEventListener('DOMContentLoaded', function()
 {
     for(var i=1;i<30;i++)
     {
-        $('#backgroundPicker').append('<div class="col-lg-2 col-md-6">'+
-        '<span class="d-block mb-4 h-100">'+
-            '<div data-src="./assets/img/background/'+i+'.png" class="background-img" style="background: url(\'./assets/img/background/'+i+'.png\');'+
-            'background-repeat: repeat;background-size: auto;"></div>'+
-        '</span>'+
-    '</div>');
+        if(i<23)
+        {
+            $('#backgroundPicker').append('<div class="col-lg-2 col-md-6">'+
+            '<span class="d-block mb-4 h-100">'+
+                '<div data-src="./assets/img/background/'+i+'.png" class="background-img" style="background: url(\'./assets/img/background/'+i+'.png\');'+
+                'background-repeat: repeat;background-size: auto;"></div>'+
+            '</span>'+
+            '</div>');
+        }
+        else
+        {
+            $('#backgroundPicker').append('<div class="col-lg-2 col-md-6">'+
+            '<span class="d-block mb-4 h-100">'+
+                '<div data-src="./assets/img/background/'+i+'.png" class="background-img" style="background: url(\'./assets/img/background/'+i+'.png\');'+
+                'background-repeat: no-repeat;background-size: auto;"></div>'+
+            '</span>'+
+            '</div>');
+        }
     }
     const pickr = new Pickr({
 
@@ -234,11 +246,22 @@ document.addEventListener('DOMContentLoaded', function()
         document.querySelector('#header-nav').setAttribute('style', 
         'background-color:'+localStorage['header-color']+' !important');
     }
+    
     if (localStorage.getItem('backgroundImg') !== null) 
     {
+        var filenameBackground = localStorage['backgroundImg'].split('/').pop();
+        indexfileName = filenameBackground.substr(0, filenameBackground.lastIndexOf('.'));
         $('body').css('background-image', 'url('+localStorage['backgroundImg']+')');
-        $('body').css('background-repeat', 'repeat');
-        $('body').css('background-size', 'auto');
+        if(indexfileName<23)
+        {
+            $('body').css('background-repeat', 'repeat');
+            $('body').css('background-size', 'auto');
+        }
+        else
+        {
+            $('body').css('background-repeat', 'no-repeat');
+            $('body').css('background-size', 'cover');
+        }
     }
 
     var buttonsToggleDark = document.getElementsByName('toggleDark');
@@ -312,7 +335,7 @@ document.addEventListener('DOMContentLoaded', function()
                                         '<div class="col text-left" style="margin-top:15px;">'+
                                             '<button name="btn-setting" data-id="'+a.id+'" class="btn btn-secondary text-center" data-toggle="modal" data-target="#modalSetting">'+
                                                 '<i class="material-icons align-middle" style="padding-right:10px" aria-hidden="true">settings</i>'+
-                                                '<span class="align-middle">Setting</span>'+
+                                                '<span class="align-middle">Settings</span>'+
                                             '</button>'+
                                         '</div>'+
                                         '<div class="col text-right" style="margin-top:15px;">'+
@@ -380,10 +403,19 @@ document.addEventListener('DOMContentLoaded', function()
         });
         $( ".background-img" ).bind( "click", function(e) 
         {
-                //chrome.tabs.create({url:  $(this).attr('href')});background-repeat: repeat;background-size
+                var filenameBackground = $(this).attr('data-src').split('/').pop();
+                indexfileName = filenameBackground.substr(0, filenameBackground.lastIndexOf('.'));
                 $('body').css('background-image', 'url('+$(this).attr('data-src')+')');
-                $('body').css('background-repeat', 'repeat');
-                $('body').css('background-size', 'auto');
+                if(indexfileName<23)
+                {
+                    $('body').css('background-repeat', 'repeat');
+                    $('body').css('background-size', 'auto');
+                }
+                else
+                {
+                    $('body').css('background-repeat', 'no-repeat');
+                    $('body').css('background-size', 'cover');
+                }
                 localStorage['backgroundImg'] = $(this).attr('data-src');
         });
     });

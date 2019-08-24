@@ -119,8 +119,10 @@
           <form class="needs-validation" novalidate>
             <div class="form-group">
               <label for="fileNameExtension">File name :</label>
-              <input type="text" class="form-control" id="fileNameExtension" pattern="^\/[\w,\s-/]+\.html$" aria-describedby="fileNameHelp" placeholder="Enter file name" required>
-              <small id="fileNameHelp" class="form-text text-muted">The file name must be like that /filename.html and you can add like this : /directory/filename.html if it's in a specific directory</small>
+              <input type="text" class="form-control" id="fileNameExtension" pattern="\/[\w,\s\/-]+\.html" aria-describedby="fileNameHelp" placeholder="Enter file name" required>
+              <small id="fileNameHelp" class="form-text text-muted">
+                The file name must be like that /filename.html and you can add like this : /directory/filename.html if it's in a specific directory
+              </small>
               <div class="invalid-feedback">
                 Please enter a valid fileName.
               </div>
