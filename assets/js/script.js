@@ -58,7 +58,6 @@ function launchExtension(extensionId)
             {
                 localStorage[idExtensionModal] = fileNameExtension; 
             }
-            alert('Test');
         }, false);
       });
     }, false);
@@ -382,7 +381,6 @@ document.addEventListener('DOMContentLoaded', function()
         $( ".background-img" ).bind( "click", function(e) 
         {
                 //chrome.tabs.create({url:  $(this).attr('href')});background-repeat: repeat;background-size
-                console.log($(this).attr('data-src'));
                 $('body').css('background-image', 'url('+$(this).attr('data-src')+')');
                 $('body').css('background-repeat', 'repeat');
                 $('body').css('background-size', 'auto');

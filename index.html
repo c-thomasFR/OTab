@@ -52,9 +52,7 @@
   </nav>
   <div style="height: 100%; width: 100%; overflow-y: hidden; overflow-x: hidden;">
     <div class="container-fluid top-buffer">
-        <div class="row" id='grid-logo-extension'>
-            
-        </div>
+        <div class="row" id='grid-logo-extension'></div>
     </div>
   </div>
   <div class="modal fade" id="modalTheme" tabindex="-1" role="dialog" aria-labelledby="themeTitle" aria-hidden="true">
@@ -73,24 +71,27 @@
               <button type="button" class="btn btn-light" name="toggleDark" id='btn-light'>
                   <i class="material-icons align-middle" style="padding-right:10px" aria-hidden="true">compare</i>
                   <span class="align-middle">Light</span>
-                </button>
-                <button type="button" class="btn btn-dark" name="toggleDark" id='btn-dark'>
-                  <i class="material-icons align-middle" style="padding-right:10px" aria-hidden="true">compare</i>
-                  <span class="align-middle">Dark</span>
-                </button>
+              </button>
+              <button type="button" class="btn btn-dark" name="toggleDark" id='btn-dark'>
+                <i class="material-icons align-middle" style="padding-right:10px" aria-hidden="true">compare</i>
+                <span class="align-middle">Dark</span>
+              </button>
             </div>
           </div>
           <div class="form-group row">
-              <label for="message-text" class="col-sm-5 col-form-label">Color for the header:</label>
-              <div class="col-sm-7">
-                  <button type="button" class="btn btn-primary" id='btn-color-picker'>
-                  </button>
-              </div>
+            <label for="message-text" class="col-sm-5 col-form-label">Color for the header:</label>
+            <div class="col-sm-7">
+              <button type="button" class="btn btn-primary" id='btn-color-picker'>
+              </button>
+            </div>
           </div>
           <div class="form-group">
-              <label for="backgroundPicker">Choose a background:</label>            
-              <div class="row text-center text-lg-left" id='backgroundPicker'>
-              </div>
+            <label for="backgroundPicker">Choose a background:</label>            
+            <div class="row text-center text-lg-left" id='backgroundPicker'></div>
+          </div>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
         </div>
       </div>
     </div>
