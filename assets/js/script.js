@@ -108,7 +108,7 @@ document.addEventListener('DOMContentLoaded', function()
             $('#backgroundPicker').append('<div class="col-lg-2 col-md-6">'+
             '<span class="d-block mb-4 h-100">'+
                 '<div data-src="./assets/img/background/'+i+'.png" class="background-img" style="background: url(\'./assets/img/background/'+i+'.png\');'+
-                'background-repeat: repeat;background-size: auto;"></div>'+
+                'background-repeat: repeat;background-size: contain;"></div>'+
             '</span>'+
             '</div>');
         }
@@ -117,7 +117,7 @@ document.addEventListener('DOMContentLoaded', function()
             $('#backgroundPicker').append('<div class="col-lg-2 col-md-6">'+
             '<span class="d-block mb-4 h-100">'+
                 '<div data-src="./assets/img/background/'+i+'.png" class="background-img" style="background: url(\'./assets/img/background/'+i+'.png\');'+
-                'background-repeat: no-repeat;background-size: auto;"></div>'+
+                'background-repeat: no-repeat;background-size: cover;"></div>'+
             '</span>'+
             '</div>');
         }
