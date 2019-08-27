@@ -19,30 +19,10 @@
   <nav id='header-nav' class="navbar navbar-expand navbar-light bg-light justify-content-between" style="
   padding-bottom: 0px;
   padding-top: 0px;">
-    <a class="navbar-brand" href="#"><img src="./assets/img/icon96.png" alt='Icon OTab'></a>
+    <div class="navbar-brand"><img id='logoOTab' src="./assets/img/icon96.png" alt='Icon OTab'></div>
     <span class="navbar-text">
         One tab to find and rule all newtab
     </span>
-    <!--
-    <div>
-      <button type="button" class="btn btn-light" name="toggleDark" id='btn-light'>
-        <i class="material-icons align-middle" style="padding-right:10px" aria-hidden="true">compare</i>
-        <span class="align-middle">Light</span>
-      </button>
-      <button type="button" class="btn btn-dark" name="toggleDark" id='btn-dark'>
-        <i class="material-icons align-middle" style="padding-right:10px" aria-hidden="true">compare</i>
-        <span class="align-middle">Dark</span>
-      </button>
-      <button type="button" class="btn btn-secondary text-center" name="palette" id="palette">
-          <i class="material-icons align-middle" style="padding-right:10px" aria-hidden="true">palette</i>
-          <span class="align-middle">Palette</span>
-      </button>
-      <button type="button" class="btn btn-secondary text-center" name="wallpaper">
-          <i class="material-icons align-middle" style="padding-right:10px" aria-hidden="true">wallpaper</i>
-          <span class="align-middle">Wallpaper</span>
-      </button>
-    </div>
-    -->
     <div>
         <button type="button" class="btn btn-primary" name="build" data-toggle="modal" data-target="#modalTheme">
           <i class="material-icons align-middle" style="padding-right:10px" aria-hidden="true">build</i>
@@ -51,7 +31,7 @@
     </div>
   </nav>
   <div style="height: 100%; width: 100%; overflow-y: hidden; overflow-x: hidden;">
-    <div class="container-fluid top-buffer">
+    <div id='container-body' class="container-fluid top-buffer">
         <div class="row" id='grid-logo-extension'></div>
     </div>
   </div>

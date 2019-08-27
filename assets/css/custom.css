@@ -35,3 +35,10 @@ body
     height:100px;
     object-fit: cover;
 }
+
+#logoOTab
+{
+    overflow: hidden;
+    transition-duration: 0.8s;
+    transition-property: transform;
+}
