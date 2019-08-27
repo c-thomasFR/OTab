@@ -122,6 +122,66 @@ document.addEventListener('DOMContentLoaded', function()
             '</div>');
         }
     }
+    if (localStorage.getItem('header-color') !== null) 
+    {
+        document.querySelector('#header-nav').setAttribute('style', 
+        'background-color:'+localStorage['header-color']+' !important');
+    }
+    
+    if (localStorage.getItem('backgroundImg') !== null) 
+    {
+        var filenameBackground = localStorage['backgroundImg'].split('/').pop();
+        indexfileName = filenameBackground.substr(0, filenameBackground.lastIndexOf('.'));
+        $('body').css('background-image', 'url('+localStorage['backgroundImg']+')');
+        if(indexfileName<23)
+        {
+            $('body').css('background-repeat', 'repeat');
+            $('body').css('background-size', 'auto');
+        }
+        else
+        {
+            $('body').css('background-repeat', 'no-repeat');
+            $('body').css('background-size', 'cover');
+        }
+    }
+
+    var buttonsToggleDark = document.getElementsByName('toggleDark');
+    if(localStorage["darkMode"] === undefined)
+    {
+        $('link[href="./assets/css/bootstrap-light.min.css"]').prop('disabled', false);
+        $('link[href="./assets/css/bootstrap-dark.min.css"]').prop('disabled', true);
+    }
+    else
+    {
+        if(localStorage["darkMode"]=="dark")
+        {
+            $('link[href="./assets/css/bootstrap-light.min.css"]').prop('disabled', true);
+            $('link[href="./assets/css/bootstrap-dark.min.css"]').prop('disabled', false);
+        }
+        else if(localStorage["darkMode"]=="light")
+        {
+            $('link[href="./assets/css/bootstrap-light.min.css"]').prop('disabled', false);
+            $('link[href="./assets/css/bootstrap-dark.min.css"]').prop('disabled', true);
+        }
+    }
+    checkCssLoadedDark();
+    buttonsToggleDark[0].onclick = function()
+    {
+        toggleDarkLight();
+    };
+    buttonsToggleDark[1].onclick = function()
+    {
+        toggleDarkLight();
+    };
+
+    if($('link[href="./assets/css/bootstrap-dark.min.css"]').prop( "disabled" )===false)
+    {
+        var defaultColorPicker = "#00bc8c";
+    }
+    else if($('link[href="./assets/css/bootstrap-light.min.css"]').prop( "disabled" )===false)
+    {
+        var defaultColorPicker = "#ffffff";
+    }
     const pickr = new Pickr({
 
         // Selector or element which will be replaced with the actual color-picker.
@@ -174,7 +234,7 @@ document.addEventListener('DOMContentLoaded', function()
         // If set to false it would directly apply the selected color on the button and preview.
         comparison: true,
         // Default color
-        default: '#000000',
+        default: defaultColorPicker,
         swatches: null,
     
         // Default color representation of the input/output textbox.
@@ -232,7 +292,10 @@ document.addEventListener('DOMContentLoaded', function()
            cancel: 'Cancel' // Default for cancel button
         }
     });
-
+    pickr.on('init', instance => 
+    {
+        $('.pcr-button').css('border', '2px solid black');
+    });
     pickr.on('save', (color, instance) => 
     {
         //console.log('save', color, instance);
@@ -241,57 +304,7 @@ document.addEventListener('DOMContentLoaded', function()
         'background-color:'+color.toHEXA().toString()+' !important');
         localStorage['header-color'] = color.toHEXA().toString();
     });
-    if (localStorage.getItem('header-color') !== null) 
-    {
-        document.querySelector('#header-nav').setAttribute('style', 
-        'background-color:'+localStorage['header-color']+' !important');
-    }
-    
-    if (localStorage.getItem('backgroundImg') !== null) 
-    {
-        var filenameBackground = localStorage['backgroundImg'].split('/').pop();
-        indexfileName = filenameBackground.substr(0, filenameBackground.lastIndexOf('.'));
-        $('body').css('background-image', 'url('+localStorage['backgroundImg']+')');
-        if(indexfileName<23)
-        {
-            $('body').css('background-repeat', 'repeat');
-            $('body').css('background-size', 'auto');
-        }
-        else
-        {
-            $('body').css('background-repeat', 'no-repeat');
-            $('body').css('background-size', 'cover');
-        }
-    }
 
-    var buttonsToggleDark = document.getElementsByName('toggleDark');
-    if(localStorage["darkMode"] === undefined)
-    {
-        $('link[href="./assets/css/bootstrap-light.min.css"]').prop('disabled', false);
-        $('link[href="./assets/css/bootstrap-dark.min.css"]').prop('disabled', true);
-    }
-    else
-    {
-        if(localStorage["darkMode"]=="dark")
-        {
-            $('link[href="./assets/css/bootstrap-light.min.css"]').prop('disabled', true);
-            $('link[href="./assets/css/bootstrap-dark.min.css"]').prop('disabled', false);
-        }
-        else if(localStorage["darkMode"]=="light")
-        {
-            $('link[href="./assets/css/bootstrap-light.min.css"]').prop('disabled', false);
-            $('link[href="./assets/css/bootstrap-dark.min.css"]').prop('disabled', true);
-        }
-    }
-    checkCssLoadedDark();
-    buttonsToggleDark[0].onclick = function()
-    {
-        toggleDarkLight();
-    };
-    buttonsToggleDark[1].onclick = function()
-    {
-        toggleDarkLight();
-    };
     var index = 0;
     var array=[];
     var options = document.getElementById('list_extensions');
