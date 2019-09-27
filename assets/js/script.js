@@ -150,7 +150,15 @@ document.addEventListener('DOMContentLoaded', function()
         '<p>You enabled a secret feature with the Konami Code!</p>'+
         '<p>Take a look in the Theme settings ;)</p>'+
         '</div>');
+        localStorage["konamiCode"] = 'on';
     }
+    
+    function isFileImage(file) 
+    {
+        const acceptedImageTypes = ['image/jpeg', 'image/png'];
+        return file && acceptedImageTypes.includes(file['type'])
+    }
+    
 
     for(var i=1;i<30;i++)
     {
@@ -173,12 +181,51 @@ document.addEventListener('DOMContentLoaded', function()
             '</div>');
         }
     }
+    if (localStorage.getItem('konamiCode') !== null) 
+    {
+        if(localStorage.getItem('konamiCode')=='on')
+        {
+            $('#konamiCodeDiv').show();
+            $(".custom-file-input").on("change", function(event) 
+            {
+                var fileName = $(this).val().split("\\").pop();
+                var file = event.target.files[0];
+                console.log(isFileImage(file));
+                if(isFileImage(file))
+                {
+                    $('#alertWrongFileType').hide();
+                    $(this).siblings(".custom-file-label").addClass("selected").html(fileName);
+                    console.log(event.target.files[0]);
+                    console.log($(this));
+                    webkitRequestFileSystem(PERSISTENT, 1024, function(filesystem) 
+                    {
+                        filesystem.root.getFile("test", { create: true }, function(file) 
+                        {
+                            file.createWriter(function(writer) 
+                            {
+                                writer.addEventListener("write", function(event) 
+                                {
+                                    location = file.toURL()
+                                })
+                                writer.addEventListener("error", console.error)
+                                writer.write(new Blob([ "test" ]))
+                            }, console.error)
+                        }, console.error)
+                    }, console.error);                       
+                    //$('#FormImagePicker').submit();
+                }
+                else
+                {
+                    $('#alertWrongFileType').show();
+                }
+            });
+        }
+    }
     if (localStorage.getItem('header-color') !== null) 
     {
         document.querySelector('#header-nav').setAttribute('style', 
         'background-color:'+localStorage['header-color']+' !important');
     }
-    
     if (localStorage.getItem('backgroundImg') !== null) 
     {
         var filenameBackground = localStorage['backgroundImg'].split('/').pop();

@@ -65,6 +65,13 @@
               </button>
             </div>
           </div>
+          <div class="alert alert-danger" role="alert" id='alertWrongFileType' style="display: none">
+              You must enter a png or jpeg file !
+          </div>
+          <div id='konamiCodeDiv' class="custom-file hide">
+            <input type="file" accept="image/x-png,image/jpeg" class="custom-file-input" id="backgroundImagePicker">
+            <label class="custom-file-label" for="backgroundImagePicker">Add a image as background:</label>
+          </div>
           <div class="form-group">
             <label for="backgroundPicker">Choose a background:</label>            
             <div class="row text-center text-lg-left" id='backgroundPicker'></div>

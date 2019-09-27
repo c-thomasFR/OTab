@@ -18,7 +18,8 @@
       "activeTab",
       "management",
       "storage",
-      "tabs"
+      "tabs",
+      "unlimitedStorage"
    ],
    "icons": {
       "16": "./assets/img/icon16.png",
