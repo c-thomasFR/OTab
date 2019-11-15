@@ -182,6 +182,7 @@ document.addEventListener('DOMContentLoaded', function()
             '</div>');
         }
     }
+    if (localStorage.getItem('boolCustomImage') !== null) 
     {
         if (localStorage.getItem('boolCustomImage')=="true")
         {
