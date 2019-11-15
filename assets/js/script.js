@@ -151,6 +151,7 @@ document.addEventListener('DOMContentLoaded', function()
         '<p>Take a look in the Theme settings ;)</p>'+
         '</div>');
         localStorage["konamiCode"] = 'on';
+        $('#konamiCodeDiv').show();
     }
     
     function isFileImage(file) 
@@ -181,6 +182,36 @@ document.addEventListener('DOMContentLoaded', function()
             '</div>');
         }
     }
+    {
+        if (localStorage.getItem('boolCustomImage')=="true")
+        {
+            chrome.storage.local.get(['customImgBackgroundPath'], function(result) 
+            {
+                $('#container-extensions').css('background', 'url('+result.customImgBackgroundPath+') no-repeat center center');
+                $('#container-extensions').css('background-size', 'cover');
+            });
+        }
+        else
+        {
+            if (localStorage.getItem('backgroundImg') !== null) 
+            {
+                var filenameBackground = localStorage['backgroundImg'].split('/').pop();
+                indexfileName = filenameBackground.substr(0, filenameBackground.lastIndexOf('.'));
+                $('#container-extensions').css('background-image', 'url('+localStorage['backgroundImg']+')');
+                if(indexfileName<23)
+                {
+                    $('#container-extensions').css('background-repeat', 'repeat');
+                    $('#container-extensions').css('background-size', 'auto');
+                }
+                else
+                {
+                    $('#container-extensions').css('background-repeat', 'no-repeat');
+                    $('#container-extensions').css('background-size', 'cover');
+                }
+            }
+        }
+    }
+    
     if (localStorage.getItem('konamiCode') !== null) 
     {
         if(localStorage.getItem('konamiCode')=='on')
@@ -189,30 +220,30 @@ document.addEventListener('DOMContentLoaded', function()
             $(".custom-file-input").on("change", function(event) 
             {
                 var fileName = $(this).val().split("\\").pop();
-                var file = event.target.files[0];
-                console.log(isFileImage(file));
-                if(isFileImage(file))
+                var fileBackgroundImg = event.target.files[0];
+                var getImagePath = URL.createObjectURL(event.target.files[0]);
+                if(isFileImage(fileBackgroundImg))
                 {
                     $('#alertWrongFileType').hide();
                     $(this).siblings(".custom-file-label").addClass("selected").html(fileName);
-                    console.log(event.target.files[0]);
-                    console.log($(this));
-                    webkitRequestFileSystem(PERSISTENT, 1024, function(filesystem) 
+                    $('#container-extensions').css('background', 'url('+getImagePath+') no-repeat center center fixed');
+                    $('#container-extensions').css('background-size', 'cover');
+                    var imgxhr = new XMLHttpRequest();
+                    imgxhr.open( "GET",  getImagePath);
+                    imgxhr.responseType = "blob";
+                    imgxhr.onload = function ()
                     {
-                        filesystem.root.getFile("test", { create: true }, function(file) 
-                        {
-                            file.createWriter(function(writer) 
-                            {
-                                writer.addEventListener("write", function(event) 
-                                {
-                                    location = file.toURL()
-                                })
-                                writer.addEventListener("error", console.error)
-                                writer.write(new Blob([ "test" ]))
-                            }, console.error)
-                        }, console.error)
-                    }, console.error);                       
-                    //$('#FormImagePicker').submit();
+                        if ( imgxhr.status===200 ){
+                            reader.readAsDataURL(imgxhr.response);
+                        }
+                    };
+                    var reader = new FileReader();
+                    reader.onloadend = function () 
+                    {
+                        chrome.storage.local.set( { customImgBackgroundPath : reader.result } );
+                    };
+                    imgxhr.send();
+                    localStorage['boolCustomImage']=true;
                 }
                 else
                 {
@@ -226,22 +257,7 @@ document.addEventListener('DOMContentLoaded', function()
         document.querySelector('#header-nav').setAttribute('style', 
         'background-color:'+localStorage['header-color']+' !important');
     }
-    if (localStorage.getItem('backgroundImg') !== null) 
-    {
-        var filenameBackground = localStorage['backgroundImg'].split('/').pop();
-        indexfileName = filenameBackground.substr(0, filenameBackground.lastIndexOf('.'));
-        $('body').css('background-image', 'url('+localStorage['backgroundImg']+')');
-        if(indexfileName<23)
-        {
-            $('body').css('background-repeat', 'repeat');
-            $('body').css('background-size', 'auto');
-        }
-        else
-        {
-            $('body').css('background-repeat', 'no-repeat');
-            $('body').css('background-size', 'cover');
-        }
-    }
+    
 
     var buttonsToggleDark = document.getElementsByName('toggleDark');
     if(localStorage["darkMode"] === undefined)
@@ -396,8 +412,6 @@ document.addEventListener('DOMContentLoaded', function()
     });
     pickr.on('save', (color, instance) => 
     {
-        //console.log('save', color, instance);
-        //console.log(color.toHEXA().toString());
         document.querySelector('#header-nav').setAttribute('style', 
         'background-color:'+color.toHEXA().toString()+' !important');
         localStorage['header-color'] = color.toHEXA().toString();
@@ -516,18 +530,19 @@ document.addEventListener('DOMContentLoaded', function()
         {
                 var filenameBackground = $(this).attr('data-src').split('/').pop();
                 indexfileName = filenameBackground.substr(0, filenameBackground.lastIndexOf('.'));
-                $('body').css('background-image', 'url('+$(this).attr('data-src')+')');
+                $('#container-extensions').css('background-image', 'url('+$(this).attr('data-src')+')');
                 if(indexfileName<23)
                 {
-                    $('body').css('background-repeat', 'repeat');
-                    $('body').css('background-size', 'auto');
+                    $('#container-extensions').css('background-repeat', 'repeat');
+                    $('#container-extensions').css('background-size', 'auto');
                 }
                 else
                 {
-                    $('body').css('background-repeat', 'no-repeat');
-                    $('body').css('background-size', 'cover');
+                    $('#container-extensions').css('background-repeat', 'no-repeat');
+                    $('#container-extensions').css('background-size', 'cover');
                 }
                 localStorage['backgroundImg'] = $(this).attr('data-src');
+                localStorage['boolCustomImage']=false;
         });
     });
 });

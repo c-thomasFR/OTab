@@ -30,7 +30,7 @@
         </button>
     </div>
   </nav>
-  <div style="height: 100%; width: 100%; overflow-y: hidden; overflow-x: hidden;">
+  <div id='container-extensions' style="height: 100%; width: 100%; overflow-y: hidden; overflow-x: hidden;">
     <div id='container-body' class="container-fluid top-buffer">
         <div class="row" id='grid-logo-extension'></div>
     </div>
@@ -68,7 +68,7 @@
           <div class="alert alert-danger" role="alert" id='alertWrongFileType' style="display: none">
               You must enter a png or jpeg file !
           </div>
-          <div id='konamiCodeDiv' class="custom-file hide">
+          <div id='konamiCodeDiv' class="custom-file hide" style="display: none;">
             <input type="file" accept="image/x-png,image/jpeg" class="custom-file-input" id="backgroundImagePicker">
             <label class="custom-file-label" for="backgroundImagePicker">Add a image as background:</label>
           </div>
